@@ -28,6 +28,7 @@ class LoginScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextFormField(
+                controller: loginController.emailControlor,
                 style: const TextStyle(color: Colors.black, height: 1.5),
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
@@ -52,9 +53,10 @@ class LoginScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFormField(
+                  controller: loginController.passwordControlor,
                   style: const TextStyle(color: Colors.black, height: 1.5),
-                  obscureText: loginController.isShow.value,
-                  keyboardType: TextInputType.none,
+                  obscureText: !loginController.isShow.value,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
@@ -68,41 +70,43 @@ class LoginScreen extends StatelessWidget {
                         Icons.key_outlined,
                         color: Colors.red,
                       ),
-                      suffixIcon: loginController.isShow.value
-                          ? IconButton(
-                              onPressed: loginController.toggleShow,
-                              icon: const Icon(Iconsax.eye_slash),
-                            )
-                          : IconButton(
-                              onPressed: loginController.toggleShow,
-                              icon: const Icon(Iconsax.eye)),
+                      suffixIcon: IconButton(
+                        onPressed: loginController.toggleShow,
+                        icon: loginController.isShow.value
+                            ? const Icon(Iconsax.eye_slash)
+                            : const Icon(Iconsax.eye),
+                      ),
                       contentPadding: const EdgeInsets.all(12)),
                 ),
               ),
             ),
             const SizedBox(height: 40),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 200, vertical: 20),
-              child: ElevatedButton(
-                  onPressed: () {
-                    loginController.login();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    backgroundColor: Colors.redAccent,
-                    minimumSize: const Size(double.infinity, 50),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                  child: const Text("Login",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                      ))),
+            Obx(
+              () => Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 200, vertical: 20),
+                child: loginController.isLoading.value
+                    ? const CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: () {
+                          loginController.login();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          backgroundColor: Colors.redAccent,
+                          minimumSize: const Size(double.infinity, 50),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                          ),
+                        ),
+                        child: const Text("Login",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                            ))),
+              ),
             )
           ],
         ),
