@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:urgence_app/controller/login_controller.dart';
+import 'package:urgence_app/view/screens/auth/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -80,6 +81,23 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // Get.to(ResetPasswoedScreen());
+                    },
+                    child: const Text(
+                      "Forgot Password?",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 40),
             Obx(
               () => Padding(
@@ -107,6 +125,13 @@ class LoginScreen extends StatelessWidget {
                               fontSize: 25,
                             ))),
               ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              child: const Text("If you don't have an account, Sign Up"),
+              onPressed: () => Get.to(const RegisterScreen()),
             )
           ],
         ),

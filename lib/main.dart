@@ -2,18 +2,26 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:urgence_app/firebase_options.dart';
+import 'package:urgence_app/utils/shared_preferences.dart';
 import 'package:urgence_app/view/screens/auth/login_screen.dart';
+import 'package:urgence_app/view/screens/auth/reset_passwoed_screen.dart';
+import 'package:urgence_app/view/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  AuthSharedPreferences authSharedPreferences = AuthSharedPreferences();
+  bool isLoggedIn = await authSharedPreferences.getLoginStatus();
+  runApp(MyApp(
+    isLoggedIn: isLoggedIn,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+  const MyApp({super.key, required this.isLoggedIn});
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -23,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: isLoggedIn ? const HomeScreen() : const ResetPasswordScreen(),
     );
   }
 }
