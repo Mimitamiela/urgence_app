@@ -86,12 +86,17 @@ class LoginController extends GetxController {
     }
 
     try {
-      if (FirebaseAuth.instance.currentUser!.emailVerified == true) {
+      QuerySnapshot userSnapshot = await firestore
+          .collection("students")
+          .where("email", isEqualTo: email)
+          .get();
+
+      if (userSnapshot.docs.isNotEmpty) {
         await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
 
         Get.snackbar(
           'Success',
-          'If an account with this email exists, a password reset email has been sent. Please check your inbox.',
+          'A password reset email has been sent. Please check your inbox.',
           icon: const Icon(Icons.verified_outlined, color: Colors.green),
           backgroundColor: Colors.white,
           colorText: Colors.green,
@@ -102,6 +107,18 @@ class LoginController extends GetxController {
         );
 
         Get.to(const LoginScreen());
+      } else {
+        Get.snackbar(
+          'Error',
+          'No user found with this email.',
+          icon: const Icon(Icons.error, color: Colors.red),
+          backgroundColor: Colors.white,
+          colorText: Colors.red,
+          animationDuration: const Duration(milliseconds: 1000),
+          duration: const Duration(seconds: 6),
+          snackPosition: SnackPosition.BOTTOM,
+          snackStyle: SnackStyle.FLOATING,
+        );
       }
     } on FirebaseAuthException catch (e) {
       Get.snackbar(

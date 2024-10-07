@@ -39,6 +39,7 @@ class RegisterController extends GetxController {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       await firestore.collection("students").doc(userCredential.user!.uid).set({
+        "email": emailControlor.text,
         "firstName": firstNameControlor.text,
         "lastName": lastNameControlor.text,
         "phoneNumber": phoneNumberControlor.text,
