@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:urgence_app/firebase_options.dart';
 import 'package:urgence_app/utils/shared_preferences.dart';
 import 'package:urgence_app/view/screens/auth/login_screen.dart';
-import 'package:urgence_app/view/screens/auth/reset_passwoed_screen.dart';
 import 'package:urgence_app/view/screens/home_screen.dart';
 
 void main() async {
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: isLoggedIn ? const HomeScreen() : const ResetPasswordScreen(),
+      home: isLoggedIn ? const HomeScreen() : const LoginScreen(),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:urgence_app/controller/login_controller.dart';
 
 class ResetPasswordScreen extends StatelessWidget {

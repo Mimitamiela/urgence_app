@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ class LoginController extends GetxController {
   final isLoading = false.obs;
 
   AuthSharedPreferences authSharedPreferences = AuthSharedPreferences();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   void toggleShow() {
     isShow.value = !isShow.value;
@@ -66,19 +68,65 @@ class LoginController extends GetxController {
   }
 
   void resetPassword() async {
-    try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailControlor.text.trim());
-    } catch (e) {
+    String email = emailControlor.text.trim();
+
+    if (email.isEmpty) {
       Get.snackbar(
-          icon: const Icon(Icons.error, color: Colors.red),
+        'Error',
+        'Please enter your email address.',
+        icon: const Icon(Icons.error, color: Colors.red),
+        backgroundColor: Colors.white,
+        colorText: Colors.red,
+        animationDuration: const Duration(milliseconds: 1000),
+        duration: const Duration(seconds: 6),
+        snackPosition: SnackPosition.BOTTOM,
+        snackStyle: SnackStyle.FLOATING,
+      );
+      return;
+    }
+
+    try {
+      if (FirebaseAuth.instance.currentUser!.emailVerified == true) {
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+
+        Get.snackbar(
+          'Success',
+          'If an account with this email exists, a password reset email has been sent. Please check your inbox.',
+          icon: const Icon(Icons.verified_outlined, color: Colors.green),
           backgroundColor: Colors.white,
-          colorText: Colors.red,
+          colorText: Colors.green,
           animationDuration: const Duration(milliseconds: 1000),
+          duration: const Duration(seconds: 20),
           snackPosition: SnackPosition.BOTTOM,
           snackStyle: SnackStyle.FLOATING,
-          'Error',
-          e.toString());
+        );
+
+        Get.to(const LoginScreen());
+      }
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar(
+        'Error',
+        e.message ?? 'An unexpected error occurred.',
+        icon: const Icon(Icons.error, color: Colors.red),
+        backgroundColor: Colors.white,
+        colorText: Colors.red,
+        animationDuration: const Duration(milliseconds: 1000),
+        duration: const Duration(seconds: 6),
+        snackPosition: SnackPosition.BOTTOM,
+        snackStyle: SnackStyle.FLOATING,
+      );
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'An unexpected error occurred.',
+        icon: const Icon(Icons.error, color: Colors.red),
+        backgroundColor: Colors.white,
+        colorText: Colors.red,
+        animationDuration: const Duration(milliseconds: 1000),
+        duration: const Duration(seconds: 6),
+        snackPosition: SnackPosition.BOTTOM,
+        snackStyle: SnackStyle.FLOATING,
+      );
     }
   }
 }
