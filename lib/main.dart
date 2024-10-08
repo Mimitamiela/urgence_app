@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:urgence_app/firebase_options.dart';
 import 'package:urgence_app/utils/shared_preferences.dart';
 import 'package:urgence_app/view/screens/auth/login_screen.dart';
+
+import 'package:urgence_app/view/screens/help_buuton.dart';
 import 'package:urgence_app/view/screens/home_screen.dart';
 
 void main() async {
