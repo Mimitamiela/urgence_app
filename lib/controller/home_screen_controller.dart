@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:urgence_app/utils/location_service.dart';
 
 class HomeScreenController extends GetxController {
   var selectedChip = 0.obs;

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:urgence_app/utils/shared_preferences.dart';
-import 'package:urgence_app/view/assistance_home_screen.dart';
+import 'package:urgence_app/view/screens/assistance_home_screen.dart';
 import 'package:urgence_app/view/screens/auth/login_screen.dart';
 import 'package:urgence_app/view/screens/home_screen.dart';
 

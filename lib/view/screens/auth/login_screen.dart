@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:urgence_app/controller/login_controller.dart';
-import 'package:urgence_app/view/assistance_home_screen.dart';
 import 'package:urgence_app/view/screens/auth/register_screen.dart';
 import 'package:urgence_app/view/screens/auth/reset_passwoed_screen.dart';
-import 'package:urgence_app/view/screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

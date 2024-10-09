@@ -10,10 +10,15 @@ class AssistanceHomeScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text('ASSISTANCE HOME'),
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundImage: AssetImage("assets/images/7N2O.gif"),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ClipOval(
+            child: Image.asset(
+              "assets/images/7N2O.gif",
+              fit: BoxFit.cover,
+              width: 40,
+              height: 40,
+            ),
           ),
         ),
       ),
