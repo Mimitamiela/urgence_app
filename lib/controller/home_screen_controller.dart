@@ -7,22 +7,22 @@ class HomeScreenController extends GetxController {
   late RxDouble animationValue;
   var isDarkMode = false.obs;
   var isLocationOn = false.obs;
-  final LocationService locationService = LocationService();
+  // final LocationService locationService = LocationService();
 
-  void checkLocationStatus() async {
-    bool permissionGranted = await locationService.checkLocationPermission();
-    bool locationEnabled = await locationService.isLocationEnabled();
+  // void checkLocationStatus() async {
+  //   bool permissionGranted = await locationService.checkLocationPermission();
+  //   bool locationEnabled = await locationService.isLocationEnabled();
 
-    if (permissionGranted && locationEnabled) {
-      isLocationOn.value = true;
-    } else {
-      isLocationOn.value = false;
-    }
-  }
+  //   if (permissionGranted && locationEnabled) {
+  //     isLocationOn.value = true;
+  //   } else {
+  //     isLocationOn.value = false;
+  //   }
+  // }
 
   @override
   void onInit() {
-    checkLocationStatus();
+    // checkLocationStatus();
     super.onInit();
     animationValue = 240.0.obs;
     startAnimation();

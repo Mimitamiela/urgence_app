@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class StudentModel {
   String? firstName;
   String? lastName;
@@ -6,15 +8,24 @@ class StudentModel {
   String? diseases;
   String? bloodType;
   String? email;
+  String? dateOfBirth;
+  String? gender;
+  String? imageUrl;
+  DateTime? createdAt;
 
-  StudentModel(
-      {this.firstName,
-      this.lastName,
-      this.phoneNumber,
-      this.parentPhoneNumber,
-      this.diseases,
-      this.bloodType,
-      this.email});
+  StudentModel({
+    this.firstName,
+    this.lastName,
+    this.phoneNumber,
+    this.parentPhoneNumber,
+    this.diseases,
+    this.bloodType,
+    this.email,
+    this.dateOfBirth,
+    this.gender,
+    this.imageUrl,
+    this.createdAt,
+  });
 
   StudentModel.fromJson(Map<String, dynamic> json) {
     firstName = json['firstName'];
@@ -24,6 +35,10 @@ class StudentModel {
     diseases = json['diseases'];
     bloodType = json['bloodType'];
     email = json['email'];
+    dateOfBirth = json['dateOfBirth'];
+    gender = json['gender'];
+    imageUrl = json['imageUrl'];
+    createdAt = (json['createdAt'] as Timestamp?)?.toDate();
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +50,10 @@ class StudentModel {
     data['diseases'] = diseases;
     data['bloodType'] = bloodType;
     data['email'] = email;
+    data['dateOfBirth'] = dateOfBirth;
+    data['gender'] = gender;
+    data['imageUrl'] = imageUrl;
+    data['createdAt'] = createdAt;
     return data;
   }
 }

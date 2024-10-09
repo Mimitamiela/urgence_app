@@ -1,4 +1,4 @@
-package com.example.urgence_app
+package com.helpme.app
 
 import io.flutter.embedding.android.FlutterActivity
 
